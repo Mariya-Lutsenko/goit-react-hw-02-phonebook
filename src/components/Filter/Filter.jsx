@@ -5,8 +5,14 @@ const Filter = ({ value, onChange }) => {
   return (
     <div className={css.filter}>
       <label className={css.labelFilter}>
-        Filter
-        <input className={css.filterInput} type="name" name="filter" value={value} onChange={onChange} />
+        Find contacts by name
+        <input
+          className={css.filterInput}
+          type="name"
+          name="filter"
+          value={value}
+          onChange={onChange}
+        />
       </label>
     </div>
   );

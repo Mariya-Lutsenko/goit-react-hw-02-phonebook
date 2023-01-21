@@ -41,7 +41,6 @@ class App extends Component {
     }));
   };
 
-
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };

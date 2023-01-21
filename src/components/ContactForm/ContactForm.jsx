@@ -15,9 +15,7 @@ class ContactForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // передаэмо метод із пропсів
     const { onSubmit } = this.props;
-    // передаємо у onSubmit значення із state. Вони потрапляють у функцію addContact
     onSubmit(this.state);
     this.resetForm();
   };
@@ -34,7 +32,8 @@ class ContactForm extends Component {
       <form className={css.form} onSubmit={this.handleSubmit}>
         <label className={css.label}>
           Name
-          <input className={css.inputName}
+          <input
+            className={css.inputName}
             value={this.state.name}
             onChange={this.handleChange}
             type="text"
@@ -48,7 +47,7 @@ class ContactForm extends Component {
         <label className={css.label}>
           Number
           <input
-          className={css.inputNumber}
+            className={css.inputNumber}
             value={this.state.number}
             onChange={this.handleChange}
             type="tel"
@@ -58,7 +57,9 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <button className={css.buttonAdd} type="submit">Add contact</button>
+        <button className={css.buttonAdd} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

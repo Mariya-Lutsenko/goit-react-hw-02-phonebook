@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import css from './App.module.css';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
 
 class App extends Component {
   state = {
@@ -12,7 +13,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-
   };
 
   addContact = ({ name, number }) => {
@@ -40,15 +40,27 @@ class App extends Component {
     }));
   };
 
- 
-
-
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
 
+  getVisisbleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLocaleLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  deleteContact = todoId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== todoId),
+    }));
+  };
+
   render() {
     const { contacts, filter } = this.state;
+    
 
     return (
       <div>
@@ -67,15 +79,10 @@ class App extends Component {
           </label>
         </div>
         <h2>Contacts</h2>
-        <ul>
-          {contacts.map(({ id, name, number }) => (
-            <li key={id}>
-              <p>
-                {name} {number}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <ContactList
+          contacts={this.getVisisbleContacts()}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }

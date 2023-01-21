@@ -6,38 +6,54 @@ class App extends Component {
   state = {
     contacts: [],
     name: '',
-    number: ''
+    number: '',
   };
 
   handleChange = event => {
-    const {name, value} = event.currentTarget;
-    console.log(event.currentTarget.value);
-    this.setState({[name]: value});
-  }
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
+  };
 
+
+
+  addContact = ({ name, number }) => {
+    const normalizedName = name.toLowerCase();
+    let isAdded = false;
+    this.state.contacts.forEach(contact => {
+      if (contact.name.toLowerCase() === normalizedName) {
+        alert(`${name} is already in contacts`);
+        isAdded = true;
+      }
+    });
+
+    if (isAdded) {
+      return;
+    }
+
+    const contact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
+    this.setState(prevstate => ({
+      contacts: [...prevstate.contacts, contact],
+    }));
+  
+  };
 
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state);
-    const contact = {
-      id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
-    }
-    this.setState(prevstate => ({
-      contacts: [...prevstate.contacts, contact]
-    }))
-    console.log(this.state);
-  }
-
+    this.addContact(this.state);
+  };
 
   render() {
-    const {contacts} = this.state;
+    const { contacts } = this.state;
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <form onSubmit = {this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Name
             <input
@@ -52,17 +68,17 @@ class App extends Component {
           </label>
 
           <label>
-          Number
-          <input
-            value={this.state.number}
-            onChange={this.handleChange}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-        </label>
+            Number
+            <input
+              value={this.state.number}
+              onChange={this.handleChange}
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            />
+          </label>
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
@@ -70,7 +86,7 @@ class App extends Component {
           {contacts.map(({ id, name, number }) => (
             <li key={id}>
               <p>
-                {name}    {number}
+                {name} {number}
               </p>
             </li>
           ))}

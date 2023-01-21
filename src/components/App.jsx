@@ -69,7 +69,7 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
 
         <h2 className={css.titleContacts}>Contacts</h2>
-        <div>All contacts: {contacts.length}</div>
+        <div className={css.allContacts}>All contacts: {contacts.length}</div>
         <Filter value={filter} onChange={this.changeFilter} />
 
         <ContactList

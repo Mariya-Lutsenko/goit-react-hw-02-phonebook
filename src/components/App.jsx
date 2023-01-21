@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import css from './App.module.css';
+import css from './App.module.css';
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
@@ -64,11 +64,11 @@ class App extends Component {
     const { contacts, filter } = this.state;
 
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={css.phonebookContainer}>
+        <h1 className={css.titlePhonebook}>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
 
-        <h2>Contacts</h2>
+        <h2 className={css.titleContacts}>Contacts</h2>
         <div>All contacts: {contacts.length}</div>
         <Filter value={filter} onChange={this.changeFilter} />
 

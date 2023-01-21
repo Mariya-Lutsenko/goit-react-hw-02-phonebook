@@ -6,6 +6,7 @@ class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: ''
   };
 
   handleChange = event => {
@@ -21,6 +22,7 @@ class App extends Component {
     const contact = {
       id: nanoid(),
       name: this.state.name,
+      number: this.state.number,
     }
     this.setState(prevstate => ({
       contacts: [...prevstate.contacts, contact]
@@ -48,14 +50,27 @@ class App extends Component {
               required
             />
           </label>
+
+          <label>
+          Number
+          <input
+            value={this.state.number}
+            onChange={this.handleChange}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </label>
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
         <ul>
-          {contacts.map(({ id, name }) => (
+          {contacts.map(({ id, name, number }) => (
             <li key={id}>
               <p>
-                {name}
+                {name}    {number}
               </p>
             </li>
           ))}

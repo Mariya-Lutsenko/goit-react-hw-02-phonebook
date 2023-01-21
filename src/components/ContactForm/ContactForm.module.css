@@ -19,6 +19,7 @@
   border-width: 1px;
   border-color: rgb(116, 181, 245);
   font-size: 18px;
+  color: rgba(72, 157, 242, 1);
 }
 .inputNumber {
   composes: inputName;

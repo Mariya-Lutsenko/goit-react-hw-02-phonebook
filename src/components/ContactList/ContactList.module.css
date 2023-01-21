@@ -26,13 +26,10 @@
 }
 
 .buttonDelete {
-  display: block;
-  width: 100px;
-  height: 50px;
   color: #fff;
   border-radius: 5px;
-  /* padding: 5px 10px; */
-  font-size: 18px;
+  padding: 5px 10px;
+  font-size: 14px;
   font-family: 'Lato', sans-serif;
   font-weight: 500;
   cursor: pointer;

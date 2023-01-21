@@ -41,6 +41,7 @@ class App extends Component {
     }));
   };
 
+
   changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
@@ -61,7 +62,6 @@ class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-    
 
     return (
       <div>
@@ -70,11 +70,8 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <div>All contacts: {contacts.length}</div>
-        <Filter value={filter} onChange={this.changeFilter}/>
-        
+        <Filter value={filter} onChange={this.changeFilter} />
 
-        
-       
         <ContactList
           contacts={this.getVisisbleContacts()}
           onDeleteContact={this.deleteContact}

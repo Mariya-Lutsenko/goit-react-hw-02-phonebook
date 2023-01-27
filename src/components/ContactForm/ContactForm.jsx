@@ -3,6 +3,10 @@ import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',
@@ -16,8 +20,11 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { onSubmit } = this.props;
-    onSubmit(this.state);
-    this.resetForm();
+    const result = onSubmit({ ...this.state });
+    // result true or false
+    if (result) {
+      this.resetForm();
+    }
   };
 
   resetForm = () => {
@@ -65,7 +72,4 @@ class ContactForm extends Component {
   }
 }
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 export default ContactForm;

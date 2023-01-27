@@ -16,19 +16,19 @@ class App extends Component {
     filter: '',
   };
 
-  addContact = ({ name, number }) => {
+  isDublicate(name) {
     const normalizedName = name.toLowerCase();
-
-    let isAdded = false;
-    this.state.contacts.forEach(contact => {
-      if (contact.name.toLowerCase() === normalizedName) {
-        alert(`${name} is already in contacts`);
-        isAdded = true;
-      }
+    const { contacts } = this.state;
+    const result = contacts.find(({ name }) => {
+      return name.toLowerCase() === normalizedName;
     });
+    return Boolean(result);
+  }
 
-    if (isAdded) {
-      return;
+  addContact = ({ name, number }) => {
+    if (this.isDublicate(name)) {
+      alert(`${name} is already in contacts`);
+      return false;
     }
 
     const contact = {
@@ -36,9 +36,11 @@ class App extends Component {
       name: name,
       number: number,
     };
+
     this.setState(prevstate => ({
       contacts: [...prevstate.contacts, contact],
     }));
+    return true;
   };
 
   changeFilter = event => {
